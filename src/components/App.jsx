@@ -30,20 +30,20 @@ export const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = newContact => {
-    const totalNames = contacts.map(contact => contact.name);
-    if (!totalNames.includes(newContact.name)) {
-      setContacts(prevState => [...prevState, newContact]);
-    } else {
-      window.alert(`${newContact.name} is allready in contacts`);
-    }
-  };
+  // const addContact = newContact => {
+  //   const totalNames = contacts.map(contact => contact.name);
+  //   if (!totalNames.includes(newContact.name)) {
+  //     setContacts(prevState => [...prevState, newContact]);
+  //   } else {
+  //     window.alert(`${newContact.name} is allready in contacts`);
+  //   }
+  // };
 
-  const deleteContact = contactId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== contactId)
-    );
-  };
+  // const deleteContact = contactId => {
+  //   setContacts(prevState =>
+  //     prevState.filter(contact => contact.id !== contactId)
+  //   );
+  // };
 
   const changeFilter = e => {
     setFilter(e.currentTarget.value);
@@ -60,10 +60,15 @@ export const App = () => {
   return (
     <Layout>
       <h1>Phonebook</h1>
-      <ContactsForm onSave={addContact} />
+      <ContactsForm
+      // onSave={addContact}
+      />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
-      <ContactsList contacts={getVisibleContacts()} onDelete={deleteContact} />
+      <ContactsList
+        contacts={getVisibleContacts()}
+        // onDelete={deleteContact}
+      />
       <GlobalStyle />
     </Layout>
   );
