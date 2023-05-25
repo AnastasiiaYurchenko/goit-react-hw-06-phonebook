@@ -10,6 +10,8 @@ import { FormWrapper } from './ContactsForm.styled';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import 'yup-phone-lite';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/actions';
 
 const ContactsSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,38 +21,43 @@ const ContactsSchema = Yup.object().shape({
   number: Yup.string().phone('UA').required('Required field'),
 });
 
-export const ContactsForm = ({ onSave }) => (
-  <FormWrapper>
-    <Formik
-      initialValues={{
-        name: '',
-        number: '',
-      }}
-      validationSchema={ContactsSchema}
-      onSubmit={(values, actions) => {
-        // console.log(values);
-        onSave({
-          ...values,
-          id: nanoid(),
-        });
-        actions.resetForm();
-      }}
-    >
-      <Form>
-        <FormField>
-          Name
-          <Field name="name" placeholder="Jane Petrenko" />
-          <ErrorMessage name="name" component="div" />
-        </FormField>
+export const ContactsForm = ({ onSave }) => {
+  const dispatch = useDispatch();
 
-        <FormField>
-          Number
-          <Field type="tel" name="number" />
-          <ErrorMessage name="number" component="div" />
-        </FormField>
+  return (
+    <FormWrapper>
+      <Formik
+        initialValues={{
+          name: '',
+          number: '',
+        }}
+        validationSchema={ContactsSchema}
+        onSubmit={(values, actions) => {
+          // console.log(values);
+          onSave({
+            ...values,
+            id: nanoid(),
+          });
+          dispatch(addContact(values));
+          actions.resetForm();
+        }}
+      >
+        <Form>
+          <FormField>
+            Name
+            <Field name="name" placeholder="Jane Petrenko" />
+            <ErrorMessage name="name" component="div" />
+          </FormField>
 
-        <Button type="submit">Add contact</Button>
-      </Form>
-    </Formik>
-  </FormWrapper>
-);
+          <FormField>
+            Number
+            <Field type="tel" name="number" />
+            <ErrorMessage name="number" component="div" />
+          </FormField>
+
+          <Button type="submit">Add contact</Button>
+        </Form>
+      </Formik>
+    </FormWrapper>
+  );
+};
