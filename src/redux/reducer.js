@@ -1,4 +1,6 @@
 // import { combineReducers } from 'redux';
+
+import { createReducer } from '@reduxjs/toolkit';
 import { addContact, deleteContact } from './actions';
 
 const contactsInitialState = [
@@ -10,35 +12,50 @@ const contactsInitialState = [
 
 // const filterInitialState = '';
 
-export const contactsReducer = (state = contactsInitialState, action) => {
-  switch (action.type) {
-    case addContact.type: {
-      return [...state, action.payload];
+export const contactsReducer = createReducer(contactsInitialState, {
+  [addContact]: (state, action) => {
+    const totalNames = state.map(contact => contact.name);
 
-      // state.contacts.map(contact => {
-      //   if (contact.name === action.payload.name) {
-      //     return window.alert(
-      //       `${action.payload.name} is allready in contacts`
-      //     );
-      //   }
-      //   return action.payload;
-      // }),
-      // ],
-      // };
-    }
-    case deleteContact.type: {
-      return state.filter(contact => contact.id !== action.payload);
-      // {
-      //   ...state,
-      //   contacts: state.contacts.filter(
-      //     contact => contact.id !== action.payload
-      //   ),
-      // }
-    }
-    default:
+    if (totalNames.includes(action.payload.name)) {
+      window.alert(`${action.payload.name} is allready in contacts`);
       return state;
-  }
-};
+    }
+    state.push(action.payload);
+  },
+  [deleteContact]: (state, action) => {
+    return state.filter(contact => contact.id !== action.payload);
+  },
+});
+
+// => {
+//   switch (action.type) {
+//     case addContact.type: {
+//       return [...state, action.payload];
+
+// state.contacts.map(contact => {
+//   if (contact.name === action.payload.name) {
+//     return window.alert(
+//       `${action.payload.name} is allready in contacts`
+//     );
+//   }
+//   return action.payload;
+// }),
+// ],
+// };
+// }
+// case deleteContact.type: {
+//   return state.filter(contact => contact.id !== action.payload);
+// {
+//   ...state,
+//   contacts: state.contacts.filter(
+//     contact => contact.id !== action.payload
+//   ),
+// }
+//     }
+//     default:
+//       return state;
+//   }
+// };
 
 // export const rootReducer = combineReducers({
 //   contacts: contactsReducer,
