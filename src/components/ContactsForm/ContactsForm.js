@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 // import { nanoid } from 'nanoid';
 import 'yup-phone-lite';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactsSlice';
 
 const ContactsSchema = Yup.object().shape({
   name: Yup.string()

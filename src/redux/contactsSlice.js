@@ -9,9 +9,7 @@ const contactsInitialState = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-// const filterInitialState = '';
-
-const contactsSlice = createSlice({
+export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
   reducers: {
