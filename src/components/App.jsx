@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Layout } from './Layout/Layout';
 import { GlobalStyle } from './GlobalStyle';
 import { ContactsForm } from './ContactsForm/ContactsForm';
@@ -24,7 +24,7 @@ import { Filter } from 'components/Filter/Filter';
 
 export const App = () => {
   // const [contacts, setContacts] = useState(getInitialContacts);
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
 
   // useEffect(() => {
   //   localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -45,9 +45,9 @@ export const App = () => {
   //   );
   // };
 
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-  };
+  // const changeFilter = e => {
+  //   setFilter(e.currentTarget.value);
+  // };
 
   // const getVisibleContacts = () => {
   //   const normalizedFilter = filter.toLowerCase();
@@ -64,7 +64,9 @@ export const App = () => {
       // onSave={addContact}
       />
       <h2>Contacts</h2>
-      <Filter value={filter} onChange={changeFilter} />
+      <Filter
+      // value={filter} onChange={changeFilter}
+      />
       <ContactsList
       // contacts={getVisibleContacts()        }
       // onDelete={deleteContact}

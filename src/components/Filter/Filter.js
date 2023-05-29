@@ -1,19 +1,28 @@
-// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 import { FieldFind, LabelFind } from './Filter.styled';
-// import { setFilter } from 'redux/actions';
+import { setFilter } from 'redux/filterSlice';
 
-export const Filter = ({ value, onChange }) => {
-  // const dispatch = useDispatch();
-  // const filter = useSelector(state => state.filter);
-  // console.log(filter);
-  console.log(value);
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filterValue = useSelector(state => state.filter);
+  console.log(filterValue);
 
-  // const handleFilterChange = value => dispatch(setFilter(value));
-  // console.log(handleFilterChange(value));
+  // const changeFilter = e => {
+  //   setFilter(e.currentTarget.value);
+  // };
+
+  const handleFilterChange = e => dispatch(setFilter(e.currentTarget.value));
+  // console.log(handleFilterChange());
   return (
     <LabelFind>
       Find contacts by name
-      <FieldFind type="text" value={value} onChange={onChange}></FieldFind>
+      <FieldFind
+        type="text"
+        value={filterValue}
+        onChange={handleFilterChange}
+      ></FieldFind>
     </LabelFind>
   );
 };
