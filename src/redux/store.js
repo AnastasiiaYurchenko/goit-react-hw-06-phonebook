@@ -1,9 +1,5 @@
-// import { createStore } from 'redux';
-// import { devToolsEnhancer } from '@redux-devtools/extension';
 import { configureStore } from '@reduxjs/toolkit';
-// import { rootReducer } from './reducer';
 import { persistedContactsReducer } from './contactsSlice';
-// import { persistStore } from 'redux-persist';
 import { filterReducer } from './filterSlice';
 import {
   persistStore,
